@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Github, Linkedin, Mail, MapPin, ExternalLink, Download, ChevronRight, Menu, X, Award, Briefcase, GraduationCap, Star } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, ExternalLink, Download, ChevronRight, Menu, X, Award, Briefcase, GraduationCap, Star, FileText, ZoomIn } from "lucide-react";
 
 const PROFILE = {
   name: "Ly Panharith",
   tagline: "Data Science & Engineering Student · AI/ML Developer",
   headline:
     "I design and deploy machine learning pipelines and full-stack applications — from real-time computer vision for security to clinical prediction models in healthcare.",
-  email: "ly.panharith@example.com",
-  github: "https://github.com/lypanharith",
-  linkedin: "https://linkedin.com/in/lypanharith",
+  email: "soklenglyly@gmail.com",
+  github: "https://github.com/Panharith2006",
+  linkedin: "https://www.linkedin.com/in/ly-panharith-952339329/",
   location: "Phnom Penh, Cambodia",
   resume: "/assets/resume.pdf",
 };
@@ -64,13 +64,15 @@ const PROJECTS = [
     tech: ["Python", "YOLO", "Django", "OpenCV", "MySQL"],
     image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=600&h=360&fit=crop&auto=format",
     color: "from-blue-600 to-blue-800",
+    github: "https://github.com/chhounpisethchesda/securevision-web",
   },
   {
     title: "Sleep & Academic Concentration Research",
     description:
       "Quantitative study on sleep deprivation and academic concentration using SPSS. Covered data cleaning, reliability analysis, regression modeling, and visualization of association outcomes.",
     tech: ["SPSS", "Statistics", "LaTeX", "Excel"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=360&fit=crop&auto=format",
+    // image: "/assets/A3.1_Group4_Ly_Panharith.pdf",
+    paper: "https://drive.google.com/file/d/1WZpydx78ThiHbiU0MobxUHF-lqegxYCw/view?usp=sharing", // replace with your Google Drive / GitHub raw link
     color: "from-purple-600 to-purple-800",
   },
   {
@@ -80,6 +82,7 @@ const PROJECTS = [
     tech: ["Python", "Django", "LangChain", "Semantic Kernel", "ChromaDB", "Flutter", "Docker", "MySQL"],
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=360&fit=crop&auto=format",
     color: "from-violet-600 to-purple-800",
+    github: "https://github.com/chhounoudom59-crypto/room_booking-",
   },
   {
     title: "Diabetes Prediction System",
@@ -88,6 +91,7 @@ const PROJECTS = [
     tech: ["Python", "Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "Streamlit"],
     image: "/assets/Diabete.png",
     color: "from-emerald-600 to-emerald-800",
+    github: "https://github.com/Panharith2006/diabetes-prediction",
     live: "https://my-diabetes-app.streamlit.app/",
   },
 ];
@@ -135,6 +139,7 @@ const EXPERIENCE = [
     desc: "Collaborated with Cambodian and Japanese university students on community-based projects, strengthening cross-cultural communication and contributing to social impact initiatives through teamwork and problem-solving.",
     color: "bg-blue-50 text-blue-600 border-blue-100",
     dotColor: "bg-blue-500",
+    link: "https://lp.impactasia.org/kimitabi/"
   },
   {
     type: "Volunteer",
@@ -148,41 +153,12 @@ const EXPERIENCE = [
   },
 ];
 
-const CERTIFICATIONS = [
-  {
-    name: "Google Data Analytics",
-    issuer: "Google / Coursera",
-    year: "2024",
-    icon: "G",
-    color: "bg-blue-50 border-blue-100",
-    iconColor: "bg-blue-500",
-  },
-  {
-    name: "Python for Data Science",
-    issuer: "IBM / Coursera",
-    year: "2023",
-    icon: "IBM",
-    color: "bg-slate-50 border-slate-200",
-    iconColor: "bg-slate-700",
-  },
-  {
-    name: "Networking Essentials",
-    issuer: "Cisco Networking Academy",
-    year: "2023",
-    icon: "C",
-    color: "bg-teal-50 border-teal-100",
-    iconColor: "bg-teal-600",
-  },
-  {
-    name: "AWS Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    year: "2024",
-    icon: "AWS",
-    color: "bg-orange-50 border-orange-100",
-    iconColor: "bg-orange-500",
-  },
+const CERTIFICATIONS: { image: string }[] = [
+  { image: "/assets/certificate-1.jpg" },
+  { image: "/assets/certificate-2.jpg" },
+  { image: "/assets/certificate-3.jpg" },
+  // Add more as needed, e.g. { image: "/assets/certificate-4.jpg" }
 ];
-
 const EDUCATION = [
   {
     degree: "Bachelor's Degree, Data Science and Engineering",
@@ -209,6 +185,21 @@ const HONORS_AWARDS = [
     year: "2023",
     detail: "Achieved the highest distinction on Cambodia's national high school examination.",
   },
+  {
+    title: "2nd Award – Top Project (Water Misting System)",
+    issuer: "Faculty of Engineering, Royal University of Phnom Penh",
+    year: "2024",
+    detail: 'Awarded Second Place for the project "Water Misting System" during the 7th Engineering Day Awards 2024, in recognition of outstanding project achievement.',
+    // image: "/assets/Engineering Day Awards 2024.jpg",
+  },
+  {
+    title: "2024 Techo Digital Talent Scholarship Recipient",
+    issuer: "Ministry of Post and Telecommunications",
+    year: "2024",
+    detail: "Awarded the 2024 Techo Digital Talent Scholarship to pursue a Bachelor's degree in Data Science at the Royal University of Phnom Penh, in recognition of academic merit and potential in digital technology.",
+    image: "/assets/Techo Digital Talent Scholarship 2024.jpg",
+  },
+
 ];
 
 const CONTACT_LINKS = [
@@ -218,10 +209,48 @@ const CONTACT_LINKS = [
   { icon: MapPin, label: "Location", value: PROFILE.location, href: null },
 ];
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+const isPdf = (src: string) => src.toLowerCase().endsWith(".pdf");
+
+function MediaThumb({
+  src,
+  alt,
+  className = "",
+  onClick,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  onClick?: () => void;
+}) {
+  if (isPdf(src)) {
+    return (
+      <div
+        onClick={onClick}
+        className={`relative overflow-hidden rounded-xl cursor-zoom-in group/thumb bg-gradient-to-br from-slate-100 to-blue-50 ${className}`}
+      >
+        <div className="absolute inset-0 bg-black/0 group-hover/thumb:bg-black/20 transition-colors flex items-center justify-center pointer-events-none">
+          <ZoomIn className="w-6 h-6 text-slate-400 opacity-0 group-hover/thumb:opacity-100 transition-opacity" />
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className={`relative overflow-hidden rounded-xl cursor-zoom-in group/thumb ${className}`} onClick={onClick}>
+      <img src={src} alt={alt} className="w-full h-full object-cover group-hover/thumb:scale-105 transition-transform duration-500" />
+      <div className="absolute inset-0 bg-black/0 group-hover/thumb:bg-black/30 transition-colors flex items-center justify-center pointer-events-none">
+        <ZoomIn className="w-6 h-6 text-white opacity-0 group-hover/thumb:opacity-100 transition-opacity" />
+      </div>
+    </div>
+  );
+}
+
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [lightbox, setLightbox] = useState<string | null>(null);
 
   const scrollTo = (label: string) => {
     document.getElementById(sectionId(label))?.scrollIntoView({ behavior: "smooth" });
@@ -434,13 +463,15 @@ export default function App() {
                 key={p.title}
                 className="bg-white rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
               >
-                <div className="h-48 overflow-hidden relative">
-                  <img
-                    src={p.image}
+                <div className="h-48 relative">
+                  <MediaThumb
+                    src={p.thumbnail ?? p.image}
                     alt={p.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full"
+                    onClick={() => setLightbox(p.image)}
                   />
-                  {p.color && <div className={`absolute inset-0 bg-gradient-to-t ${p.color} opacity-40`} />}
+                  {p.color && !isPdf(p.thumbnail ?? p.image) && <div className={`absolute inset-0 bg-gradient-to-t ${p.color} opacity-30 pointer-events-none`} />}
+
                 </div>
                 <div className="p-6">
                   <h3 className="font-bold text-[#111827] text-base mb-2">{p.title}</h3>
@@ -452,8 +483,18 @@ export default function App() {
                       </span>
                     ))}
                   </div>
-                  {(p.live || p.github) && (
+                  {(p.live || p.github || p.paper) && (
                     <div className="flex gap-2 flex-wrap">
+                      {p.paper && (
+                        <a
+                          href={p.paper}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-purple-600 text-white text-xs font-semibold hover:bg-purple-700 transition-colors"
+                        >
+                          <FileText className="w-3.5 h-3.5" /> Read Paper
+                        </a>
+                      )}
                       {p.live && (
                         <a
                           href={p.live}
@@ -548,26 +589,29 @@ export default function App() {
       <section id="certifications" className="py-20 px-6 bg-[#F8FAFC]">
         <div className="max-w-6xl mx-auto">
           <SectionHeader label="Certifications" title="Credentials I have earned" />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
-            {CERTIFICATIONS.map((cert) => (
-              <div
-                key={cert.name}
-                className="bg-white rounded-3xl p-6 border border-border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col gap-4"
-              >
-                <div className={`w-12 h-12 rounded-2xl ${cert.iconColor} flex items-center justify-center text-white font-black text-xs`}>
-                  {cert.icon}
+          {CERTIFICATIONS.length === 0 ? (
+            <p className="text-center text-[#94A3B8] mt-12 text-sm">No certifications added yet.</p>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-12">
+              {CERTIFICATIONS.map((cert, i) => (
+                <div
+                  key={i}
+                  className="bg-white rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                >
+                  <MediaThumb
+                    src={cert.image}
+                    alt={`Certificate ${i + 1}`}
+                    className="w-full h-44"
+                    onClick={() => setLightbox(cert.image)}
+                  />
+                  <div className="px-4 py-3 flex items-center justify-between">
+                    <span className="text-xs font-semibold text-[#64748B]">Certificate {i + 1}</span>
+                    <button onClick={() => setLightbox(cert.image)} className="text-[#2563EB] hover:underline text-xs font-semibold">View</button>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold text-[#111827] text-sm leading-snug mb-1">{cert.name}</h3>
-                  <p className="text-[#64748B] text-xs font-medium">{cert.issuer}</p>
-                </div>
-                <div className="mt-auto flex items-center justify-between">
-                  <span className="text-xs text-[#94A3B8]">{cert.year}</span>
-                  <Award className="w-4 h-4 text-[#2563EB]" />
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -579,15 +623,25 @@ export default function App() {
             {HONORS_AWARDS.map((honor) => (
               <div
                 key={honor.title}
-                className="bg-white rounded-3xl p-6 border border-border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                className="bg-white rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
               >
-                <div className="w-12 h-12 rounded-2xl bg-[#EFF6FF] border border-blue-100 flex items-center justify-center mb-4">
-                  <Award className="w-5 h-5 text-[#2563EB]" />
+                {honor.image && (
+                  <MediaThumb
+                    src={honor.image}
+                    alt={honor.title}
+                    className="w-full h-40"
+                    onClick={() => honor.image && setLightbox(honor.image)}
+                  />
+                )}
+                <div className="p-6">
+                  <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] border border-blue-100 flex items-center justify-center mb-3">
+                    <Award className="w-4 h-4 text-[#2563EB]" />
+                  </div>
+                  <h3 className="font-bold text-[#111827] text-sm mb-1">{honor.title}</h3>
+                  <p className="text-[#2563EB] text-xs font-semibold mb-2">{honor.issuer}</p>
+                  <p className="text-[#64748B] text-sm leading-relaxed mb-3">{honor.detail}</p>
+                  <span className="text-xs text-[#94A3B8] font-medium">{honor.year}</span>
                 </div>
-                <h3 className="font-bold text-[#111827] text-sm mb-1">{honor.title}</h3>
-                <p className="text-[#2563EB] text-xs font-semibold mb-2">{honor.issuer}</p>
-                <p className="text-[#64748B] text-sm leading-relaxed mb-3">{honor.detail}</p>
-                <span className="text-xs text-[#94A3B8] font-medium">{honor.year}</span>
               </div>
             ))}
           </div>
@@ -708,6 +762,53 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* MEDIA MODAL (image lightbox + PDF viewer) */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <div
+            className="relative w-full max-w-5xl flex items-center justify-center"
+            style={{ maxHeight: "90vh" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {isPdf(lightbox) ? (
+              <object
+                data={lightbox}
+                type="application/pdf"
+                className="w-full rounded-2xl shadow-2xl bg-white"
+                style={{ height: "85vh" }}
+              >
+                <embed
+                  src={lightbox}
+                  type="application/pdf"
+                  className="w-full rounded-2xl"
+                  style={{ height: "85vh" }}
+                />
+                <p className="text-white text-center mt-4">
+                  PDF cannot be displayed.{" "}
+                  <a href={lightbox} download className="underline text-blue-300">Download it</a> instead.
+                </p>
+              </object>
+            ) : (
+              <img
+                src={lightbox}
+                alt="Full view"
+                className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+              />
+            )}
+            <button
+              onClick={() => setLightbox(null)}
+              className="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-white text-[#111827] flex items-center justify-center shadow-lg hover:bg-[#F8FAFC] transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* FOOTER */}
       <footer className="border-t border-border bg-white py-10 px-6">
