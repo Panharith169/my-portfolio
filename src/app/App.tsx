@@ -98,18 +98,6 @@ const PROJECTS = [
 
 const EXPERIENCE = [
   {
-    type: "Research",
-    icon: GraduationCap,
-    role: "Member",
-    org: "451 Alliance",
-    period: "August 2026 – Present",
-    desc: "Contribute to S&P Global's 451 Alliance research community by sharing insights on AI, cloud computing, cybersecurity, and enterprise IT trends through surveys, reports, and industry webinars.",
-    color: "bg-purple-50 text-purple-600 border-purple-100",
-    dotColor: "bg-purple-500",
-    link: "https://www.spglobal.com/marketintelligence/en/news-insights/latest-news-headlines/451-research-launches-451-alliance-a-global-technology-research-community-7112026",
-    linkLabel: "Learn more",
-  },
-  {
     type: "Internship",
     icon: Briefcase,
     role: "Artificial Intelligence Engineer",
