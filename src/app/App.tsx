@@ -10,7 +10,7 @@ const PROFILE = {
   github: "https://github.com/Panharith2006",
   linkedin: "https://www.linkedin.com/in/ly-panharith-952339329/",
   location: "Phnom Penh, Cambodia",
-  resume: "/assets/resume.pdf",
+  resume: "/assets/Bachelor Scholarship.pdf",
 };
 
 const NAV_LINKS = ["About", "Skills", "Projects", "Experience", "Certifications", "Honors & awards", "Contact"];
@@ -71,8 +71,8 @@ const PROJECTS = [
     description:
       "Quantitative study on sleep deprivation and academic concentration using SPSS. Covered data cleaning, reliability analysis, regression modeling, and visualization of association outcomes.",
     tech: ["SPSS", "Statistics", "LaTeX", "Excel"],
-    // image: "/assets/A3.1_Group4_Ly_Panharith.pdf",
-    paper: "https://drive.google.com/file/d/1WZpydx78ThiHbiU0MobxUHF-lqegxYCw/view?usp=sharing", // replace with your Google Drive / GitHub raw link
+    image: "/assets/A3.1_Group4_Ly_Panharith.pdf",
+    paper: "/assets/A3.1_Group4_Ly_Panharith.pdf",
     color: "from-purple-600 to-purple-800",
   },
   {
@@ -153,11 +153,9 @@ const EXPERIENCE = [
   },
 ];
 
-const CERTIFICATIONS: { image: string }[] = [
-  { image: "/assets/certificate-1.jpg" },
-  { image: "/assets/certificate-2.jpg" },
-  { image: "/assets/certificate-3.jpg" },
-  // Add more as needed, e.g. { image: "/assets/certificate-4.jpg" }
+const CERTIFICATIONS = [
+  { image: "/assets/Bachelor Scholarship.pdf", title: "Techo Digital Talent Scholarship 2024" },
+  { image: "/assets/Volunteer.pdf", title: "Volunteer Certificate" },
 ];
 const EDUCATION = [
   {
@@ -190,16 +188,14 @@ const HONORS_AWARDS = [
     issuer: "Faculty of Engineering, Royal University of Phnom Penh",
     year: "2024",
     detail: 'Awarded Second Place for the project "Water Misting System" during the 7th Engineering Day Awards 2024, in recognition of outstanding project achievement.',
-    // image: "/assets/Engineering Day Awards 2024.jpg",
   },
   {
     title: "2024 Techo Digital Talent Scholarship Recipient",
     issuer: "Ministry of Post and Telecommunications",
     year: "2024",
     detail: "Awarded the 2024 Techo Digital Talent Scholarship to pursue a Bachelor's degree in Data Science at the Royal University of Phnom Penh, in recognition of academic merit and potential in digital technology.",
-    image: "/assets/Techo Digital Talent Scholarship 2024.jpg",
+    image: "/assets/Bachelor Scholarship.pdf",
   },
-
 ];
 
 const CONTACT_LINKS = [
@@ -227,10 +223,13 @@ function MediaThumb({
     return (
       <div
         onClick={onClick}
-        className={`relative overflow-hidden rounded-xl cursor-zoom-in group/thumb bg-gradient-to-br from-slate-100 to-blue-50 ${className}`}
+        className={`relative overflow-hidden rounded-xl cursor-pointer group/thumb bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-50 border border-blue-100 flex flex-col items-center justify-center p-4 text-center ${className}`}
       >
-        <div className="absolute inset-0 bg-black/0 group-hover/thumb:bg-black/20 transition-colors flex items-center justify-center pointer-events-none">
-          <ZoomIn className="w-6 h-6 text-slate-400 opacity-0 group-hover/thumb:opacity-100 transition-opacity" />
+        <FileText className="w-9 h-9 text-[#2563EB] mb-2 group-hover/thumb:scale-110 transition-transform" />
+        <span className="text-xs font-semibold text-[#111827] line-clamp-2 px-2">{alt}</span>
+        <span className="mt-1.5 px-2 py-0.5 rounded-md bg-blue-100/80 text-[#2563EB] text-[10px] font-bold uppercase tracking-wider">PDF Document</span>
+        <div className="absolute inset-0 bg-black/0 group-hover/thumb:bg-black/10 transition-colors flex items-center justify-center pointer-events-none">
+          <ZoomIn className="w-6 h-6 text-slate-700 opacity-0 group-hover/thumb:opacity-100 transition-opacity" />
         </div>
       </div>
     );
@@ -600,13 +599,13 @@ export default function App() {
                 >
                   <MediaThumb
                     src={cert.image}
-                    alt={`Certificate ${i + 1}`}
+                    alt={cert.title ?? `Certificate ${i + 1}`}
                     className="w-full h-44"
                     onClick={() => setLightbox(cert.image)}
                   />
-                  <div className="px-4 py-3 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#64748B]">Certificate {i + 1}</span>
-                    <button onClick={() => setLightbox(cert.image)} className="text-[#2563EB] hover:underline text-xs font-semibold">View</button>
+                  <div className="px-4 py-3 flex items-center justify-between gap-2">
+                    <span className="text-xs font-semibold text-[#64748B] truncate">{cert.title ?? `Certificate ${i + 1}`}</span>
+                    <button onClick={() => setLightbox(cert.image)} className="text-[#2563EB] hover:underline text-xs font-semibold flex-shrink-0">View</button>
                   </div>
                 </div>
               ))}
@@ -770,28 +769,36 @@ export default function App() {
           onClick={() => setLightbox(null)}
         >
           <div
-            className="relative w-full max-w-5xl flex items-center justify-center"
+            className="relative w-full max-w-5xl flex flex-col items-center justify-center bg-white rounded-3xl overflow-hidden shadow-2xl p-4"
             style={{ maxHeight: "90vh" }}
             onClick={(e) => e.stopPropagation()}
           >
             {isPdf(lightbox) ? (
-              <object
-                data={lightbox}
-                type="application/pdf"
-                className="w-full rounded-2xl shadow-2xl bg-white"
-                style={{ height: "85vh" }}
-              >
-                <embed
+              <div className="w-full h-full flex flex-col items-center">
+                <iframe
                   src={lightbox}
-                  type="application/pdf"
-                  className="w-full rounded-2xl"
-                  style={{ height: "85vh" }}
+                  title="PDF Viewer"
+                  className="w-full rounded-2xl bg-slate-50 border border-border"
+                  style={{ height: "72vh" }}
                 />
-                <p className="text-white text-center mt-4">
-                  PDF cannot be displayed.{" "}
-                  <a href={lightbox} download className="underline text-blue-300">Download it</a> instead.
-                </p>
-              </object>
+                <div className="pt-3 flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href={lightbox}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#2563EB] text-white text-xs font-semibold hover:bg-[#1D4ED8] transition-colors shadow-sm"
+                  >
+                    <ExternalLink className="w-4 h-4" /> Open PDF in New Tab
+                  </a>
+                  <a
+                    href={lightbox}
+                    download
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 text-[#111827] text-xs font-semibold hover:bg-slate-200 transition-colors border border-border"
+                  >
+                    <Download className="w-4 h-4" /> Download PDF
+                  </a>
+                </div>
+              </div>
             ) : (
               <img
                 src={lightbox}
@@ -801,7 +808,7 @@ export default function App() {
             )}
             <button
               onClick={() => setLightbox(null)}
-              className="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-white text-[#111827] flex items-center justify-center shadow-lg hover:bg-[#F8FAFC] transition-colors"
+              className="absolute top-3 right-3 w-9 h-9 rounded-full bg-slate-100 text-[#111827] flex items-center justify-center shadow-md hover:bg-slate-200 transition-colors z-10"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
