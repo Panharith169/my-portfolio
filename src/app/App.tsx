@@ -10,7 +10,7 @@ const PROFILE = {
   github: "https://github.com/Panharith2006",
   linkedin: "https://www.linkedin.com/in/ly-panharith-952339329/",
   location: "Phnom Penh, Cambodia",
-  resume: "/assets/Bachelor Scholarship.pdf",
+  resume: "/assets/Ly_Panharith_CV.pdf",
 };
 
 const NAV_LINKS = ["About", "Skills", "Projects", "Experience", "Certifications", "Honors & awards", "Contact"];
@@ -120,7 +120,7 @@ const EXPERIENCE = [
     dotColor: "bg-emerald-500",
   },
   {
-    type: "Volunteer",
+    type: "Education",
     icon: Star,
     role: "Translator",
     org: "Singapore Polytechnic",
@@ -336,13 +336,12 @@ export default function App() {
               >
                 View Projects <ChevronRight className="w-4 h-4" />
               </button>
-              <a
-                href={PROFILE.resume}
-                download
-                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white border border-[rgba(0,0,0,0.1)] text-[#111827] font-semibold text-sm hover:bg-[#F8FAFC] transition-all duration-150 shadow-sm"
+              <button
+                onClick={() => setLightbox(PROFILE.resume)}
+                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white border border-[rgba(0,0,0,0.1)] text-[#111827] font-semibold text-sm hover:bg-[#F8FAFC] transition-all duration-150 shadow-sm cursor-pointer"
               >
-                <Download className="w-4 h-4" /> Download Resume
-              </a>
+                <FileText className="w-4 h-4 text-[#2563EB]" /> View Resume
+              </button>
             </div>
             <div className="flex items-center gap-4 justify-center lg:justify-start">
               <a
