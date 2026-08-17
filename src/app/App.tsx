@@ -108,6 +108,18 @@ const EXPERIENCE = [
     dotColor: "bg-emerald-500",
   },
   {
+    type: "Research",
+    icon: Briefcase,
+    role: "Volunteer Research Assistant",
+    org: "EjadLab",
+    period: "2026 – Present",
+    desc: "Collaborate with researchers from different countries on cutting-edge AI and software developments, aiming to publish high-quality research papers at top international venues.",
+    color: "bg-purple-50 text-purple-600 border-purple-100",
+    dotColor: "bg-purple-500",
+    link: "https://www.ejadlab.com/a/index.php",
+    linkLabel: "Visit EjadLab Website",
+  },
+  {
     type: "Education",
     icon: Star,
     role: "Project Member",
@@ -427,10 +439,10 @@ export default function App() {
             <div className="bg-white rounded-3xl p-8 border border-border shadow-sm">
               <h3 className="text-lg font-bold text-[#111827] mb-4">Biography</h3>
               <p className="text-[#64748B] leading-relaxed mb-4">
-                I am a Data Science and Engineering student at the Royal University of Phnom Penh, with a parallel degree in English from the Institute of Foreign Languages. My work spans production-ready web applications, machine learning pipelines, and academic research.
+                I am a Data Science and Engineering student at the Royal University of Phnom Penh, with a parallel degree in English from the Institute of Foreign Languages. My work is mainly about Agentic RAG, Machine Learning pipelines, and academic research.
               </p>
               <p className="text-[#64748B] leading-relaxed">
-                I focus on applying AI to real-world problems — from deploying computer vision systems during my internship at MISTI to building clinical prediction tools and conducting statistical research. I aim to create technology that is rigorous, accessible, and impactful.
+                I focus on applying AI to real-world problems — from deploying computer vision systems at MISTI and conducting research as a Volunteer Research Assistant at EjadLab to building clinical prediction tools and statistical models.
               </p>
             </div>
 
