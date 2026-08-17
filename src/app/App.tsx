@@ -110,7 +110,7 @@ const EXPERIENCE = [
   {
     type: "Education",
     icon: Star,
-    role: "Translator",
+    role: "Project Member",
     org: "Singapore Polytechnic",
     period: "Mar 2026 – Apr 2026",
     desc: "Supported the Overseas Sustainable Innovation Project (OSIP) 2026 in Phnom Penh — facilitating communication between Singaporean students and pepper farmers in Kampot during field research, interviews, and prototype development.",
@@ -141,9 +141,53 @@ const EXPERIENCE = [
   },
 ];
 
-const CERTIFICATIONS = [
-  { image: "/assets/Bachelor Scholarship.pdf", title: "Techo Digital Talent Scholarship 2024" },
-  { image: "/assets/Volunteer.pdf", title: "Volunteer Certificate" },
+interface Certification {
+  title: string;
+  image?: string;
+  link?: string;
+  issuer?: string;
+  date?: string;
+  credentialId?: string;
+}
+
+const CERTIFICATIONS: Certification[] = [
+  {
+    title: "Global MOOC on the Ethics of AI",
+    issuer: "UNESCO",
+    date: "Aug 2026",
+    credentialId: "74ECLBWZEEM2",
+    link: "https://www.coursera.org/account/accomplishments/records/74ECLBWZEEM2",
+  },
+  {
+    title: "AI & Python Development",
+    issuer: "Udemy",
+    credentialId: "UC-6e3fe992-83fe-49fd-a668-6858db19b3e0",
+    link: "https://ude.my/UC-6e3fe992-83fe-49fd-a668-6858db19b3e0",
+  },
+  {
+    title: "Essentials of AI Learning Frameworks & Advanced Models",
+    issuer: "UniAthena",
+    date: "Apr 2025",
+    credentialId: "9394-2911-9524",
+    link: "https://uniathena.com/verify/certificate?certID=9394-2911-9524",
+  },
+  {
+    title: "AWS Certified Machine Learning - Specialty",
+    issuer: "AWS Training Online",
+    date: "Jun 2024",
+    link: "https://www.credly.com/badges/3ff07ea5-8af9-4e5b-b400-9fedb473b4bf/public_url",
+  },
+  {
+    title: "NICC Leadership Certificate",
+    image: "/assets/NICC Leadership.pdf",
+    issuer: "NICC",
+    date: "2025",
+  },
+  {
+    title: "Leadership Certificate",
+    image: "/assets/Leadership Certificate.pdf",
+    date: "2025",
+  },
 ];
 const EDUCATION = [
   {
@@ -176,6 +220,7 @@ const HONORS_AWARDS = [
     issuer: "Faculty of Engineering, Royal University of Phnom Penh",
     year: "2024",
     detail: 'Awarded Second Place for the project "Water Misting System" during the 7th Engineering Day Awards 2024, in recognition of outstanding project achievement.',
+    image: "/assets/Engineering Day.pdf",
   },
   {
     title: "2024 Techo Digital Talent Scholarship Recipient",
@@ -582,18 +627,45 @@ export default function App() {
               {CERTIFICATIONS.map((cert, i) => (
                 <div
                   key={i}
-                  className="bg-white rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                  className="bg-white rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between"
                 >
-                  <MediaThumb
-                    src={cert.image}
-                    alt={cert.title ?? `Certificate ${i + 1}`}
-                    className="w-full h-44"
-                    onClick={() => setLightbox(cert.image)}
-                  />
-                  <div className="px-4 py-3 flex items-center justify-between gap-2">
-                    <span className="text-xs font-semibold text-[#64748B] truncate">{cert.title ?? `Certificate ${i + 1}`}</span>
-                    <button onClick={() => setLightbox(cert.image)} className="text-[#2563EB] hover:underline text-xs font-semibold flex-shrink-0">View</button>
-                  </div>
+                  {cert.image ? (
+                    <>
+                      <MediaThumb
+                        src={cert.image}
+                        alt={cert.title}
+                        className="w-full h-44"
+                        onClick={() => setLightbox(cert.image!)}
+                      />
+                      <div className="px-4 py-3 flex items-center justify-between gap-2 border-t border-slate-100">
+                        <span className="text-xs font-bold text-[#111827] truncate">{cert.title}</span>
+                        <button onClick={() => setLightbox(cert.image!)} className="text-[#2563EB] hover:underline text-xs font-semibold flex-shrink-0">View</button>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="p-5 flex flex-col justify-between h-full min-h-[180px]">
+                      <div>
+                        <div className="w-10 h-10 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-3">
+                          <Award className="w-5 h-5 text-[#2563EB]" />
+                        </div>
+                        <h4 className="text-xs font-bold text-[#111827] leading-snug mb-1 line-clamp-2">{cert.title}</h4>
+                        {cert.issuer && <p className="text-[11px] font-semibold text-[#2563EB] mb-1">{cert.issuer}</p>}
+                      </div>
+                      <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <span className="text-[10px] text-[#94A3B8] font-medium">{cert.date ?? "Verified"}</span>
+                        {cert.link && (
+                          <a
+                            href={cert.link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 text-[#2563EB] hover:underline text-xs font-semibold"
+                          >
+                            Show credential <ExternalLink className="w-3 h-3" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
